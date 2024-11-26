@@ -7,6 +7,15 @@ const express = require("express");
 //defino uma constante chamada app que recebe uma função que inicializa uma aplicação (web api)
 const app = express();
 
+//configuração de corpo para que no momento da criação de novos clientes os dados do corpo do post sejam processados pela api
+app.use(express.json);
+
+app.post("/clientes", (request, response)=>{
+    const cliente = request.body;
+    db.insereCliente(cliente);
+    response.sendStatus(201);
+});
+
 app.get("/clientes/:id",(request, response)=>{
     const id = request.params.id;
     response.json(db.listaCliente(id));

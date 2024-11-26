@@ -23,9 +23,15 @@ function listaClientes(){
 function listaCliente(id){
     return clientes.find(c => c.id == id);
 }
+//função para inserir um cliente novo
+function insereCliente(cliente){
+    clientes.push(cliente);
+}
+
 //comando para que a função seja acessivel de fora do arquivo db.js
 module.exports = {
     listaClientes,
-    listaCliente
+    listaCliente,
+    insereCliente
 }
 
