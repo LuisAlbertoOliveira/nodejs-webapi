@@ -26,16 +26,16 @@ app.get("/clientes",(request, response)=>{
 });
 
 // criação da rota ou endpoint principal ou raiz com a função definindo o que será feito.
- app.get("/", (request,response)=> {
+ app.get("/", (request, response) => {
     response.json({
         message:"Está OK o Response!"
-    });
- });
+    })
+ })
 
 // listen é de escutar. preciso definir qual a porta de escuta. Por boa prática criei o .env 
  //app.listen(process.env.PORT);
 // posso passar a função com 2o parâmetro para testar a subida da aplicação 
 app.listen(process.env.PORT, ()=>{
-    console.log("App está funcionando bem!") ;   
-});
+    console.log("App está funcionando legal!") ;   
+})
 
