@@ -26,7 +26,7 @@ app.get("/clientes",(request, response)=>{
 });
 
 // criação da rota ou endpoint principal ou raiz com a função definindo o que será feito.
- app.get("/", (request, response) => {
+ app.get("/",(request, response) => {
     response.json({
         message:"Está OK o Response!"
     })
