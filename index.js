@@ -1,28 +1,33 @@
 require("dotenv").config();
-//require("db.js");
 
+import { insereCliente, listaCliente, listaClientes } from "./db";
 
 // defino uma constanre e recebe o require especificando a biblioteca que vai carregar.
-const express = require("express");
+import express from "express";
 //defino uma constante chamada app que recebe uma função que inicializa uma aplicação (web api)
 const app = express();
 
 //configuração de corpo para que no momento da criação de novos clientes os dados do corpo do post sejam processados pela api
-app.use(express.json);
+//app.use(express.json);
+
+/*
+
+*/
+
 
 app.post("/clientes", (request, response)=>{
     const cliente = request.body;
-    db.insereCliente(cliente);
+    insereCliente(cliente);
     response.sendStatus(201);
 });
 
 app.get("/clientes/:id",(request, response)=>{
     const id = request.params.id;
-    response.json(db.listaCliente(id));
+    response.json(listaCliente(id));
 });
 
 app.get("/clientes",(request, response)=>{
-    response.json(db.listaClientes());
+    response.json(listaClientes());
 });
 
 // criação da rota ou endpoint principal ou raiz com a função definindo o que será feito.

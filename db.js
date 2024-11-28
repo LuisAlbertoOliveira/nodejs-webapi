@@ -3,7 +3,11 @@ const clientes = [{
     id: 1,
     nome: "Luis",
     idade: 45,
-    apelido: "Luisinho" 
+    apelido: "Luisinho",
+    id: 2, 
+    nome: "Larissa",
+    idade: 15,
+    apelido: "Lari" ,    
 }];
 //Criando uma função .  padrão básico: function nome_da_funcao(){ return dado_a_ser_retornado}
 function listaClientes(){
