@@ -1,4 +1,5 @@
 require("dotenv").config();
+//require("db.js");
 
 const db = require("./db");
 
