@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-import { insereCliente, listaCliente, listaClientes } from "./db";
+const db = require("./db");
 
 // defino uma constanre e recebe o require especificando a biblioteca que vai carregar.
 import express from "express";
