@@ -3,7 +3,7 @@ require("dotenv").config();
 const db = require("./db");
 
 // defino uma constanre e recebe o require especificando a biblioteca que vai carregar.
-import express from "express";
+const express = require("express")  ;
 //defino uma constante chamada app que recebe uma função que inicializa uma aplicação (web api)
 const app = express();
 
@@ -17,17 +17,17 @@ const app = express();
 
 app.post("/clientes", (request, response)=>{
     const cliente = request.body;
-    insereCliente(cliente);
+    db.insereCliente(cliente);
     response.sendStatus(201);
 });
 
 app.get("/clientes/:id",(request, response)=>{
     const id = request.params.id;
-    response.json(listaCliente(id));
+    response.json(db.listaCliente(id));
 });
 
 app.get("/clientes",(request, response)=>{
-    response.json(listaClientes());
+    response.json(db.listaClientes());
 });
 
 // criação da rota ou endpoint principal ou raiz com a função definindo o que será feito.
