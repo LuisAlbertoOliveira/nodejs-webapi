@@ -8,12 +8,21 @@ const express = require("express")  ;
 const app = express();
 
 //configuração de corpo para que no momento da criação de novos clientes os dados do corpo do post sejam processados pela api
-//app.use(express.json);
+app.use(express.json());
 
-/*
+app.delete("/clientes/:id",(request, response)=>{
+    const id = request.params.id;
+    db.removeCliente(id);
+    response.sendStatus(204);
+});
 
-*/
-
+app.patch("/clientes/:id",(request, response)=>{
+    const id = request.params.id;
+    const dadoscliente = request.body;
+    //const idade = request.params.idade;
+    db.alteraCliente(id, dadoscliente);
+    response.sendStatus(200);
+});
 
 app.post("/clientes", (request, response)=>{
     const cliente = request.body;
