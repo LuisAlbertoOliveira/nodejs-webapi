@@ -47,7 +47,7 @@ app.get("/clientes",(request, response)=>{
      })
 
 // listen é de escutar. preciso definir qual a porta de escuta. Por boa prática criei o .env 
- //app.listen(process.env.PORT);
+ //app.listen(process.env.PORT); x
 // posso passar a função com 2o parâmetro para testar a subida da aplicação 
 app.listen(process.env.PORT, ()=>{
     console.log("App IS RUNNING!") ;   
