@@ -10,29 +10,30 @@ const app = express();
 //configuração de corpo para que no momento da criação de novos clientes os dados do corpo do post sejam processados pela api
 app.use(express.json());
 
-app.delete("/clientes/:id",(request, response)=>{
+app.delete("/clientes/:id", async(request, response)=>{
     const id = request.params.id;
     db.removeCliente(id);
     response.sendStatus(204);
 });
 
-app.patch("/clientes/:id",(request, response)=>{
+app.patch("/clientes/:id", async (request, response)=>{
     const id = request.params.id;
-    const dadoscliente = request.body;
-    //const idade = request.params.idade;
-    db.alteraCliente(id, dadoscliente);
+    const dados = request.body;
+    
+    await db.alteraCliente(id, dados);
     response.sendStatus(200);
 });
 
-app.post("/clientes", (request, response)=>{
+app.post("/clientes", async (request, response)=>{
     const cliente = request.body;
-    db.insereCliente(cliente);
+    await db.insereCliente(cliente);
     response.sendStatus(201);
 });
 
-app.get("/clientes/:id",(request, response)=>{
+app.get("/clientes/:id",async (request, response)=>{
     const id = request.params.id;
-    response.json(db.listaCliente(id));
+    const resultado = await db.listaCliente(id);
+    response.json(resultado);
 });
 
 app.get("/clientes", async (request, response)=>{

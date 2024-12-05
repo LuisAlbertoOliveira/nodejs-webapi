@@ -27,27 +27,26 @@ async function listaClientes(){
 }
 
 //Criando uma função .  padrão básico: function nome_da_funcao(){ return dado_a_ser_retornado}
-function listaCliente(id){
-    return clientes.find(c => c.id == id);
+async function listaCliente(id){
+    const resultado = await conexao.query("SELECT * FROM produto WHERE id=?;",[id]);
+    return resultado[0];
 }
 //função para inserir um cliente novo
-function insereCliente(cliente){
-    clientes.push(cliente);
+async function insereCliente(cliente){
+    const valores = [cliente.nome, cliente.quantidade, cliente.preco]
+    await conexao.query("INSERT INTO produto(nome,quantidade,preco) VALUES (?,?,?);",valores);
+  
 }
 
-function alteraCliente(id,dadoscliente){
-    const clientenovo =  clientes.find(c => c.id == id);
-   if (clientenovo){
-    clientenovo.nome =  dadoscliente.nome;
-    clientenovo.idade = dadoscliente.idade;
-   } else {
-        return("Deu ruim!");
-   }    
+async function alteraCliente(id,dado){
+    const valores = [dado.nome, dado.quantidade, dado.preco, id];
+    await conexao.query("UPDATE produto SET nome=?,quantidade=?,preco=? WHERE id=?",valores);
+
 }
 
-function removeCliente(id){
-    const indice = clientes.findIndex(c => c.id == id);
-    clientes.splice(indice,1);
+async function removeCliente(id){
+    const valores = [id];
+    await conexao.query("DELETE FROM produto WHERE id=?",valores);
 }
 
 //comando para que a função seja acessivel de fora do arquivo db.js
