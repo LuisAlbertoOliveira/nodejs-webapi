@@ -35,8 +35,9 @@ app.get("/clientes/:id",(request, response)=>{
     response.json(db.listaCliente(id));
 });
 
-app.get("/clientes",(request, response)=>{
-    response.json(db.listaClientes());
+app.get("/clientes", async (request, response)=>{
+    const resultado = await db.listaClientes();
+    response.json(resultado);
 });
 
 // criação da rota ou endpoint principal ou raiz com a função definindo o que será feito.
