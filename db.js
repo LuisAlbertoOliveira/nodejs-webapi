@@ -1,52 +1,33 @@
-// Criando uma constante com o nome clientes que é um array com chave e valor , simulando o formato json -> chave:valor . Ex.: id:1
-/*
-const clientes = [
-    { 
-        id: 1,
-        nome:"Luis",
-        idade:45
-    },
-    {
-        id: 2,
-        nome:"Alberto",
-        idade:35
-    }
-];
-*/
-// Declaração para carregar o mysql e especifico uma subárea da biblioteca que é a promise.
 const mysql = require("mysql2/promise");
 
-// Criando uma conexão com o banco mysql. Utilizando a opção createPool por ser mais profissional e não precisar abrir e encerrar cada conexão. 
 const conexao = mysql.createPool(process.env.CONNECTION_STRING);
 
-//Criando uma função .  padrão básico: function nome_da_funcao(){ return dado_a_ser_retornado}
-// Uso o await pois sempre que trabalho com consulta ao BD o retorno não é instantaneo,tenho que aguardar. Uso a palavra reservada await.(só vai para a linha de baixo quando retornar a consulta do BD). Regra: Sempre que uso o await o retorno da function tem que ser async
-async function listaClientes(){
-        const resultado = await conexao.query("SELECT * FROM produto");
+ async function listaClientes(){
+        const resultado = await conexao.query("SELECT * FROM cliente");
         return resultado[0];
 }
 
 //Criando uma função .  padrão básico: function nome_da_funcao(){ return dado_a_ser_retornado}
 async function listaCliente(id){
-    const resultado = await conexao.query("SELECT * FROM produto WHERE id=?;",[id]);
+    const resultado = await conexao.query("SELECT * FROM cliente WHERE id=?;",[id]);
     return resultado[0];
 }
 //função para inserir um cliente novo
 async function insereCliente(cliente){
-    const valores = [cliente.nome, cliente.quantidade, cliente.preco]
-    await conexao.query("INSERT INTO produto(nome,quantidade,preco) VALUES (?,?,?);",valores);
+    const valores = [cliente.nome, cliente.idade]
+    await conexao.query("INSERT INTO cliente(nome,idade) VALUES (?,?);",valores);
   
 }
 
 async function alteraCliente(id,dado){
-    const valores = [dado.nome, dado.quantidade, dado.preco, id];
-    await conexao.query("UPDATE produto SET nome=?,quantidade=?,preco=? WHERE id=?",valores);
+    const valores = [dado.nome, dado.idade, id];
+    await conexao.query("UPDATE cliente SET nome=?,idade=? WHERE id=?",valores);
 
 }
 
 async function removeCliente(id){
     const valores = [id];
-    await conexao.query("DELETE FROM produto WHERE id=?",valores);
+    await conexao.query("DELETE FROM cliente WHERE id=?",valores);
 }
 
 //comando para que a função seja acessivel de fora do arquivo db.js
